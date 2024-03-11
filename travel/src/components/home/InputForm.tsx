@@ -39,11 +39,17 @@ export default function InputForm() {
 
         const code = getFlagCode(nation);
         // console.log(`${nation}:${code}`);
-        // setNationState((prev) => [
-        //     [...prev[STATE.WANT], `${nation}:${code}`],
-        //     [...prev[STATE.WENT]],
-        //     [...prev[STATE.LIKE]],
-        // ]);
+        setNationState((prev) => [
+            [...prev[STATE.WANT], `${nation}:${code}`],
+            [...prev[STATE.WENT]],
+            [...prev[STATE.LIKE]],
+        ]);
+        toast({
+            status: "success",
+            title: `Added ${nation} successfully`,
+        });
+        reset();
+        return;
     }
 
     return (
