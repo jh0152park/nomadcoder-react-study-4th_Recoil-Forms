@@ -42,7 +42,7 @@ export const IntroText = ({
     };
 
     return (
-        <div className={cn("font-bold", className)}>
+        <div className={cn("font-bold px-20", className)}>
             <div className="mt-4">
                 <div className=" dark:text-white text-black text-2xl leading-snug tracking-wide">
                     {renderWords()}
