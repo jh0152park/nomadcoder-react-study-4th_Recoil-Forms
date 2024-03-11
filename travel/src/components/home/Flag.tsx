@@ -20,19 +20,20 @@ export default function Flag({ nation, code }: IFlagProps) {
             overflow="hidden"
             borderRadius="15px"
             position="relative"
+            mb="10px"
         >
             <Image
                 w="100%"
                 h="100%"
-                src="resources/flags/AD.gif"
+                src={`resources/flags/${code}.gif`}
                 borderRadius="15px"
                 _hover={{
                     cursor: "pointer",
                     bgColor: "black",
                     opacity: 0.5,
-                    transform: "scale(1.15)",
+                    transform: "scale(1.2)",
                 }}
-                transition="all 0.1s linear"
+                transition="all 0.2s linear"
                 onMouseOver={toggleOpacity}
                 onMouseLeave={toggleOpacity}
             />
@@ -42,7 +43,7 @@ export default function Flag({ nation, code }: IFlagProps) {
                 fontSize="20px"
                 opacity={opacity ? 1 : 0}
             >
-                Nation
+                {nation}
             </Text>
         </Center>
     );
