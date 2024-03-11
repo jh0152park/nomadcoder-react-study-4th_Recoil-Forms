@@ -238,7 +238,3 @@ export function isCorrectNation(nation: string): boolean {
 export function getFlag(nation: string): string | null {
     return NATIONS[nation];
 }
-
-// Travel can expand our thoughts and experiences.
-
-// Is there a country that stands out in your memory or a country you really want to visit?
