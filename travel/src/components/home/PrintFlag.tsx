@@ -23,6 +23,7 @@ export default function PrintFlag({ stateIndex }: IPrintFlagProps) {
             {nationList[stateIndex].map((nation) => (
                 <Flag
                     key={nation}
+                    stateIndex={stateIndex}
                     nation={nation.split(":")[0]}
                     code={nation.split(":")[1]}
                 />

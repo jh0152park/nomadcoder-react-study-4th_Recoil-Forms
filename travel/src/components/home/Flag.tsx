@@ -5,9 +5,10 @@ import DetailModal from "./DetailModal";
 interface IFlagProps {
     nation: string;
     code: string;
+    stateIndex: number;
 }
 
-export default function Flag({ nation, code }: IFlagProps) {
+export default function Flag({ nation, code, stateIndex }: IFlagProps) {
     const flagClick = useDisclosure();
     const [opacity, setOpacity] = useState(false);
 
@@ -49,10 +50,11 @@ export default function Flag({ nation, code }: IFlagProps) {
                 {nation}
             </Text>
             <DetailModal
+                code={code}
+                nation={nation}
+                stateIndex={stateIndex}
                 isOpen={flagClick.isOpen}
                 onClose={flagClick.onClose}
-                nation={nation}
-                code={code}
             />
         </Center>
     );
