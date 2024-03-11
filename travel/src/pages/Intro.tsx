@@ -1,9 +1,13 @@
 import { Center, VStack } from "@chakra-ui/react";
 import { IntroText } from "../components/intro/IntroText";
+import { Helmet } from "react-helmet";
 
 export default function Intro() {
     return (
         <Center w="100%" h="100vh">
+            <Helmet>
+                <title>Intro</title>
+            </Helmet>
             <VStack>
                 <IntroText words="Travel can expand our thoughts and experiences. Is there a country that stands out in your memory or a country you really want to visit? If you have a special memory, think about it again." />
                 <Center
@@ -19,7 +23,7 @@ export default function Intro() {
                         color: "black",
                         bgColor: "white",
                     }}
-                    transition="all 0.2s linear"
+                    transition="all 0.3s linear"
                 >
                     Let's explore your memory
                 </Center>
