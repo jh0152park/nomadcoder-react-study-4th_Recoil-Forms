@@ -1,7 +1,12 @@
 import { Center, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
 
-export default function Flag() {
+interface IFlagProps {
+    nation: string;
+    code: string;
+}
+
+export default function Flag({ nation, code }: IFlagProps) {
     const [opacity, setOpacity] = useState(false);
 
     function toggleOpacity() {
@@ -25,9 +30,9 @@ export default function Flag() {
                     cursor: "pointer",
                     bgColor: "black",
                     opacity: 0.5,
-                    transform: "scale(1.2)",
+                    transform: "scale(1.15)",
                 }}
-                transition="all 0.2s linear"
+                transition="all 0.1s linear"
                 onMouseOver={toggleOpacity}
                 onMouseLeave={toggleOpacity}
             />
