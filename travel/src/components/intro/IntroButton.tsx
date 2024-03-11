@@ -29,7 +29,7 @@ export default function IntroButton({ words }: { words: string }) {
                 bgColor: "white",
             }}
             transition="all 0.3s linear"
-            onClick={() => navigate("/add")}
+            onClick={() => navigate("/home")}
         >
             Let's explore your memory
         </Center>
