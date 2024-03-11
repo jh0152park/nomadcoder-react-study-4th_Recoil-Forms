@@ -1,8 +1,10 @@
 import "./index.css";
 import App from "./App";
+import { reset } from "styled-reset";
 import ReactDOM from "react-dom/client";
 import { createGlobalStyle } from "styled-components";
-import { reset } from "styled-reset";
+import { RecoilRoot } from "recoil";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -24,7 +26,11 @@ const root = ReactDOM.createRoot(
 
 root.render(
     <>
-        <GlobalStyle />
-        <App />
+        <RecoilRoot>
+            <GlobalStyle />
+            <ChakraProvider>
+                <App />
+            </ChakraProvider>
+        </RecoilRoot>
     </>
 );
