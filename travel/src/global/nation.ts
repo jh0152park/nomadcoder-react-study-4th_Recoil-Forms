@@ -235,6 +235,6 @@ export function isCorrectNation(nation: string): boolean {
     return !!NATIONS[nation];
 }
 
-export function getFlag(nation: string): string | null {
+export function getFlagCode(nation: string): string | null {
     return NATIONS[nation];
 }

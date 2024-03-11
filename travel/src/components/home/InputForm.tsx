@@ -1,7 +1,9 @@
 import { FieldValues, useForm } from "react-hook-form";
 import { Center, Input, useToast } from "@chakra-ui/react";
 import { Helmet } from "react-helmet";
-import { isCorrectNation } from "../../global/nation";
+import { getFlagCode, isCorrectNation } from "../../global/nation";
+import { useSetRecoilState } from "recoil";
+import { NationList, STATE } from "../../global/projectCommon";
 
 interface INation {
     nation: string;
@@ -10,6 +12,7 @@ interface INation {
 
 export default function InputForm() {
     const toast = useToast();
+    const setNationState = useSetRecoilState(NationList);
     const { reset, register, handleSubmit } = useForm<INation>();
 
     function onSubmit({ nation }: FieldValues) {
@@ -33,6 +36,14 @@ export default function InputForm() {
             reset();
             return;
         }
+
+        const code = getFlagCode(nation);
+        // console.log(`${nation}:${code}`);
+        // setNationState((prev) => [
+        //     [...prev[STATE.WANT], `${nation}:${code}`],
+        //     [...prev[STATE.WENT]],
+        //     [...prev[STATE.LIKE]],
+        // ]);
     }
 
     return (
