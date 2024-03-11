@@ -1,5 +1,6 @@
-import { Center, Image, Text } from "@chakra-ui/react";
+import { Center, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
+import DetailModal from "./DetailModal";
 
 interface IFlagProps {
     nation: string;
@@ -7,6 +8,7 @@ interface IFlagProps {
 }
 
 export default function Flag({ nation, code }: IFlagProps) {
+    const flagClick = useDisclosure();
     const [opacity, setOpacity] = useState(false);
 
     function toggleOpacity() {
@@ -21,6 +23,7 @@ export default function Flag({ nation, code }: IFlagProps) {
             borderRadius="15px"
             position="relative"
             mb="10px"
+            onClick={() => flagClick.onOpen()}
         >
             <Image
                 w="100%"
@@ -45,6 +48,12 @@ export default function Flag({ nation, code }: IFlagProps) {
             >
                 {nation}
             </Text>
+            <DetailModal
+                isOpen={flagClick.isOpen}
+                onClose={flagClick.onClose}
+                nation={nation}
+                code={code}
+            />
         </Center>
     );
 }

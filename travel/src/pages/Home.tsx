@@ -6,9 +6,14 @@ import { STATE } from "../global/projectCommon";
 
 export default function Home() {
     return (
-        <VStack w="100%" minH="100vh" my="30px" px="20px">
+        <VStack w="100%" h="100vh" py="30px" px="20px">
             <InputForm />
-            <HStack w="100%" justifyContent="center" mt="80px">
+            <HStack
+                w="100%"
+                justifyContent="center"
+                alignItems="flex-start"
+                mt="50px"
+            >
                 <PrintFlag stateIndex={STATE.WANT} />
                 <PrintFlag stateIndex={STATE.WENT} />
                 <PrintFlag stateIndex={STATE.LIKE} />

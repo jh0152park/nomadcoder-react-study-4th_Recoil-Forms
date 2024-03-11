@@ -13,10 +13,9 @@ export default function PrintFlag({ stateIndex }: IPrintFlagProps) {
     return (
         <VStack
             w="30%"
-            h="90vh"
+            minH="100vh"
             alignItems="center"
             justifyContent="flex-start"
-            overflowY="scroll"
         >
             <Center fontSize="20px" fontWeight="bold" mb="30px">
                 {STATE_TITLE[stateIndex]}
