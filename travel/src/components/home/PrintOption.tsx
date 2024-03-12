@@ -1,6 +1,12 @@
 import { Text, useToast } from "@chakra-ui/react";
 import { useRecoilState } from "recoil";
-import { deleteNation, isAlreadyExistNation } from "../../utils/updateNation";
+import {
+    addNationToList,
+    deleteNationFromList,
+    deleteNationState,
+    isAlreadyExistNation,
+    updateNationState,
+} from "../../utils/updateNation";
 import {
     LikeNationList,
     WantNationList,
@@ -11,8 +17,9 @@ interface IPrintOption {
     code: string;
     nation: string;
     action: string;
-    actionCode: number;
     stateCode: number;
+    actionCode: number;
+    onClose: () => void;
 }
 
 export default function PrintOption({
@@ -21,19 +28,38 @@ export default function PrintOption({
     action,
     actionCode,
     stateCode,
+    onClose,
 }: IPrintOption) {
     const toast = useToast();
     const [wantNationList, setWantNationList] = useRecoilState(WantNationList);
     const [wentNationList, setWentNationList] = useRecoilState(WentNationList);
     const [likeNationList, setLikeNationList] = useRecoilState(LikeNationList);
-    const nationList =
+
+    const toBeDeleteNationList =
         stateCode === 0
             ? wantNationList
             : stateCode === 1
             ? wentNationList
             : likeNationList;
 
-    function updateNationState() {
+    const toBeUpdateNationList =
+        actionCode - 1 === 0
+            ? wantNationList
+            : actionCode - 1 === 1
+            ? wentNationList
+            : likeNationList;
+
+    function updateNationListState(updateList: string[], state: number) {
+        if (state === 0) {
+            setWantNationList(updateList);
+        } else if (state === 1) {
+            setWentNationList(updateList);
+        } else if (state === 2) {
+            setLikeNationList(updateList);
+        }
+    }
+
+    function updateNation() {
         if (!isAlreadyExistNation(nation)) {
             toast({
                 status: "error",
@@ -43,27 +69,35 @@ export default function PrintOption({
             return;
         }
 
+        const deletedList = deleteNationFromList(
+            toBeDeleteNationList,
+            `${nation}:${code}`
+        );
+
         switch (actionCode) {
-            // delete
-            case 0:
-                const update = deleteNation(nationList, `${nation}:${code}`);
-
-                if (stateCode === 0) setWantNationList(update);
-                else if (stateCode === 1) setWentNationList(update);
-                else setLikeNationList(update);
-
+            case 0: // delete
+                deleteNationState(nation);
+                updateNationListState(deletedList, stateCode);
                 break;
+            case 1: // want
+            case 2: // been
+            case 3: // like
+                if (actionCode - 1 === stateCode) {
+                    toast({
+                        status: "info",
+                        title: `${nation} already there!`,
+                    });
+                    onClose();
+                    return;
+                }
 
-            // like
-            case 1:
-                break;
-
-            // been
-            case 2:
-                break;
-
-            // want
-            case 3:
+                const addedList = addNationToList(
+                    toBeUpdateNationList,
+                    `${nation}:${code}`
+                );
+                updateNationListState(deletedList, stateCode);
+                updateNationListState(addedList, actionCode - 1);
+                updateNationState(nation, actionCode - 1);
                 break;
         }
     }
@@ -75,7 +109,7 @@ export default function PrintOption({
             my="20px"
             _hover={{ cursor: "pointer", color: "blue.300" }}
             transition="all 0.1s linear"
-            onClick={updateNationState}
+            onClick={updateNation}
         >
             {action}
         </Text>

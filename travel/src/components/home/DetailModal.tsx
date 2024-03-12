@@ -24,9 +24,9 @@ interface IAction {
 
 const Actions: IAction = {
     delete: "Delete nation 🗑️",
-    like: "Move to list of like nation 🥰",
-    been: "Move to list of have been nation 🛬",
-    want: "Move to list of wanna go to nation 🏖️",
+    want: "Move to list of I wanna go there! 🏖️",
+    been: "Move to list of I've been there! 🛬",
+    like: "Move to list of I like there! 🥰",
 };
 
 export default function DetailModal({
@@ -59,6 +59,7 @@ export default function DetailModal({
                             actionCode={i}
                             stateCode={stateCode}
                             action={Actions[action]}
+                            onClose={onClose}
                         />
                     ))}
                 </ModalBody>
