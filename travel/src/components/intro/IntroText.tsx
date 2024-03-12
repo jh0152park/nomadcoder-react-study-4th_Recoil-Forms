@@ -22,7 +22,8 @@ export const IntroText = ({
                 delay: stagger(0.2),
             }
         );
-    }, [scope.current, animate]);
+        //eslint-disable-next-line
+    }, [scope.current]);
 
     const renderWords = () => {
         return (
@@ -44,7 +45,7 @@ export const IntroText = ({
     return (
         <div className={cn("font-bold px-[200px]", className)}>
             <div className="mt-4">
-                <div className="text-2xl leading-snug tracking-wide text-black  dark:text-white">
+                <div className="text-2xl leading-snug tracking-wide text-black dark:text-white">
                     {renderWords()}
                 </div>
             </div>
