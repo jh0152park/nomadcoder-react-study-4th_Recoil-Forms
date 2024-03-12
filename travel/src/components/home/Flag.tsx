@@ -10,11 +10,6 @@ interface IFlagProps {
 
 export default function Flag({ nation, code, stateCode }: IFlagProps) {
     const flagClick = useDisclosure();
-    const [opacity, setOpacity] = useState(false);
-
-    function toggleOpacity() {
-        setOpacity((prev) => !prev);
-    }
 
     return (
         <Center
@@ -22,8 +17,8 @@ export default function Flag({ nation, code, stateCode }: IFlagProps) {
             h="180px"
             overflow="hidden"
             borderRadius="15px"
-            position="relative"
             mb="10px"
+            position="relative"
             onClick={() => flagClick.onOpen()}
         >
             <Image
@@ -38,15 +33,9 @@ export default function Flag({ nation, code, stateCode }: IFlagProps) {
                     transform: "scale(1.2)",
                 }}
                 transition="all 0.2s linear"
-                onMouseOver={toggleOpacity}
-                onMouseLeave={toggleOpacity}
-            />
-            <Text
                 position="absolute"
-                fontWeight="bold"
-                fontSize="20px"
-                opacity={opacity ? 1 : 0}
-            >
+            />
+            <Text fontWeight="bold" fontSize="20px">
                 {nation}
             </Text>
             <DetailModal
