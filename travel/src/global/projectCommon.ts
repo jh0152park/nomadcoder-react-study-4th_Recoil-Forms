@@ -21,4 +21,9 @@ export const LikeNationList = atom<string[]>({
     default: [],
 });
 
-export let NationState = new Map();
+export const NationState = atom<any>({
+    key: "NationState",
+    default: new Map(),
+});
+
+// export let NationState = new Map();

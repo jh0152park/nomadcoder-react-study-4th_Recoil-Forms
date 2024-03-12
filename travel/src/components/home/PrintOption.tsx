@@ -9,6 +9,7 @@ import {
 } from "../../utils/updateNation";
 import {
     LikeNationList,
+    NationState,
     WantNationList,
     WentNationList,
 } from "../../global/projectCommon";
@@ -31,6 +32,7 @@ export default function PrintOption({
     onClose,
 }: IPrintOption) {
     const toast = useToast();
+    const [nationState, setNationState] = useRecoilState(NationState);
     const [wantNationList, setWantNationList] = useRecoilState(WantNationList);
     const [wentNationList, setWentNationList] = useRecoilState(WentNationList);
     const [likeNationList, setLikeNationList] = useRecoilState(LikeNationList);
@@ -60,7 +62,7 @@ export default function PrintOption({
     }
 
     function updateNation() {
-        if (!isAlreadyExistNation(nation)) {
+        if (!isAlreadyExistNation(nationState, nation)) {
             toast({
                 status: "error",
                 title: "Something went wrong",
@@ -76,8 +78,8 @@ export default function PrintOption({
 
         switch (actionCode) {
             case 0: // delete
-                deleteNationState(nation);
                 updateNationListState(deletedList, stateCode);
+                setNationState(deleteNationState(nationState, nation));
                 break;
             case 1: // want
             case 2: // been
@@ -97,7 +99,9 @@ export default function PrintOption({
                 );
                 updateNationListState(deletedList, stateCode);
                 updateNationListState(addedList, actionCode - 1);
-                updateNationState(nation, actionCode - 1);
+                setNationState(
+                    updateNationState(nationState, nation, actionCode - 1)
+                );
                 break;
         }
     }

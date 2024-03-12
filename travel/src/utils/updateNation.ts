@@ -1,15 +1,18 @@
-import { NationState } from "../global/projectCommon";
-
-export function isAlreadyExistNation(nation: string): boolean {
-    return NationState.has(nation);
+export function isAlreadyExistNation(map: any, nation: string): boolean {
+    return map.has(nation);
 }
 
-export function deleteNationState(nation: string): void {
-    NationState.delete(nation);
+export function deleteNationState(map: any, nation: string): any {
+    map.delete(nation);
+    return map;
 }
 
-export function updateNationState(nation: string, state: number): void {
-    NationState.set(nation, state);
+export function updateNationState(
+    map: any,
+    nation: string,
+    state: number
+): any {
+    return map.set(nation, state);
 }
 
 export function deleteNationFromList(
