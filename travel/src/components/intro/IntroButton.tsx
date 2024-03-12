@@ -11,7 +11,7 @@ export default function IntroButton({ words }: { words: string }) {
         setTimeout(() => {
             setOpacity(1);
         }, timeout * 1000 + 2000);
-    }, []);
+    }, [words]);
 
     return (
         <Center
