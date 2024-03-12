@@ -4,7 +4,6 @@ import {
     addNationToList,
     deleteNationFromList,
     deleteNationState,
-    isAlreadyExistNation,
     updateNationState,
 } from "../../utils/updateNation";
 import {
@@ -62,7 +61,7 @@ export default function PrintOption({
     }
 
     function updateNation() {
-        if (!isAlreadyExistNation(nationState, nation)) {
+        if (!nationState.hasOwnProperty(nation)) {
             toast({
                 status: "error",
                 title: "Something went wrong",
@@ -79,7 +78,9 @@ export default function PrintOption({
         switch (actionCode) {
             case 0: // delete
                 updateNationListState(deletedList, stateCode);
-                setNationState(deleteNationState(nationState, nation));
+                setNationState(
+                    deleteNationState(JSON.stringify(nationState), nation)
+                );
                 break;
             case 1: // want
             case 2: // been
@@ -100,7 +101,11 @@ export default function PrintOption({
                 updateNationListState(deletedList, stateCode);
                 updateNationListState(addedList, actionCode - 1);
                 setNationState(
-                    updateNationState(nationState, nation, actionCode - 1)
+                    updateNationState(
+                        JSON.stringify(nationState),
+                        nation,
+                        actionCode - 1
+                    )
                 );
                 break;
         }
