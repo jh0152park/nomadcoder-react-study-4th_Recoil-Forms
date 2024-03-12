@@ -51,10 +51,12 @@ export default function DetailModal({
                 </ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    {Object.keys(Actions).map((action) => (
+                    {Object.keys(Actions).map((action, i) => (
                         <PrintOption
+                            key={action}
                             code={code}
                             nation={nation}
+                            actionCode={i}
                             stateIndex={stateIndex}
                             action={Actions[action]}
                         />
