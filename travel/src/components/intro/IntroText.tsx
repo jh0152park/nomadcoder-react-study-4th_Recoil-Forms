@@ -22,7 +22,7 @@ export const IntroText = ({
                 delay: stagger(0.2),
             }
         );
-    }, [scope.current]);
+    }, [scope.current, animate]);
 
     const renderWords = () => {
         return (
@@ -31,7 +31,7 @@ export const IntroText = ({
                     return (
                         <motion.span
                             key={word + idx}
-                            className="dark:text-white text-black opacity-0"
+                            className="text-black opacity-0 dark:text-white"
                         >
                             {word}{" "}
                         </motion.span>
@@ -44,7 +44,7 @@ export const IntroText = ({
     return (
         <div className={cn("font-bold px-[200px]", className)}>
             <div className="mt-4">
-                <div className=" dark:text-white text-black text-2xl leading-snug tracking-wide">
+                <div className="text-2xl leading-snug tracking-wide text-black  dark:text-white">
                     {renderWords()}
                 </div>
             </div>
