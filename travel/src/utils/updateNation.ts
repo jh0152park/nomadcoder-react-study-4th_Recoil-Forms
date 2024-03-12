@@ -1,18 +1,19 @@
-export function isAlreadyExistNation(map: any, nation: string): boolean {
-    return map.has(nation);
-}
+export function deleteNationState(obj: string, nation: string): any {
+    let nationState = JSON.parse(obj);
 
-export function deleteNationState(map: any, nation: string): any {
-    map.delete(nation);
-    return map;
+    delete nationState[nation];
+    return nationState;
 }
 
 export function updateNationState(
-    map: any,
+    obj: string,
     nation: string,
     state: number
 ): any {
-    return map.set(nation, state);
+    let nationState = JSON.parse(obj);
+
+    nationState[nation] = state;
+    return nationState;
 }
 
 export function deleteNationFromList(
