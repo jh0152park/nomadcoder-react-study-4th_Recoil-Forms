@@ -23,9 +23,15 @@ export default function PrintOption({
     stateCode,
 }: IPrintOption) {
     const toast = useToast();
-    const wantNationList = useRecoilState(WantNationList);
-    const wentNationList = useRecoilState(WentNationList);
-    const likeNationList = useRecoilState(LikeNationList);
+    const [wantNationList, setWantNationList] = useRecoilState(WantNationList);
+    const [wentNationList, setWentNationList] = useRecoilState(WentNationList);
+    const [likeNationList, setLikeNationList] = useRecoilState(LikeNationList);
+    const nationList =
+        stateCode === 0
+            ? wantNationList
+            : stateCode === 1
+            ? wentNationList
+            : likeNationList;
 
     function updateNationState() {
         if (!isAlreadyExistNation(nation)) {
@@ -40,11 +46,12 @@ export default function PrintOption({
         switch (actionCode) {
             // delete
             case 0:
-                // const update = deleteNation(
-                //     nationList[stateIndex],
-                //     `${nation}:${code}`
-                // );
-                // console.log(update);
+                const update = deleteNation(nationList, `${nation}:${code}`);
+
+                if (stateCode === 0) setWantNationList(update);
+                else if (stateCode === 1) setWentNationList(update);
+                else setLikeNationList(update);
+
                 break;
 
             // like
