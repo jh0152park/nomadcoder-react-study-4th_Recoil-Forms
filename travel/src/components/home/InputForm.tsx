@@ -3,7 +3,11 @@ import { Center, Input, useToast } from "@chakra-ui/react";
 import { Helmet } from "react-helmet";
 import { getFlagCode, isCorrectNation } from "../../global/nation";
 import { useSetRecoilState } from "recoil";
-import { NationList, NationState, STATE } from "../../global/projectCommon";
+import {
+    NationState,
+    STATE_CODE,
+    WantNationList,
+} from "../../global/projectCommon";
 import { isAlreadyExistNation } from "../../utils/updateNation";
 
 interface INation {
@@ -12,7 +16,7 @@ interface INation {
 
 export default function InputForm() {
     const toast = useToast();
-    const setNationList = useSetRecoilState(NationList);
+    const seWantNationList = useSetRecoilState(WantNationList);
     const { reset, register, handleSubmit } = useForm<INation>();
 
     function onSubmit({ nation }: FieldValues) {
@@ -47,21 +51,18 @@ export default function InputForm() {
         }
 
         const code = getFlagCode(nation);
-        setNationList((prev) => [
-            [...prev[STATE.WANT], `${nation}:${code}`],
-            [...prev[STATE.WENT]],
-            [...prev[STATE.LIKE]],
-        ]);
-
-        NationState.set(nation, STATE.WANT);
+        NationState.set(nation, STATE_CODE.WANT);
+        seWantNationList((prev) => [...prev, `${nation}:${code}`]);
 
         toast({
             status: "success",
             title: `Added ${nation} successfully`,
         });
+
         reset();
-        return;
     }
+
+    console.log(NationState);
 
     return (
         <>

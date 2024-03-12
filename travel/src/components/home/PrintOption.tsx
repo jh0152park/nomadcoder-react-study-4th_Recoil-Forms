@@ -1,14 +1,18 @@
 import { Text, useToast } from "@chakra-ui/react";
-import { NationList } from "../../global/projectCommon";
 import { useRecoilState } from "recoil";
 import { deleteNation, isAlreadyExistNation } from "../../utils/updateNation";
+import {
+    LikeNationList,
+    WantNationList,
+    WentNationList,
+} from "../../global/projectCommon";
 
 interface IPrintOption {
     code: string;
     nation: string;
     action: string;
     actionCode: number;
-    stateIndex: number;
+    stateCode: number;
 }
 
 export default function PrintOption({
@@ -16,10 +20,12 @@ export default function PrintOption({
     nation,
     action,
     actionCode,
-    stateIndex,
+    stateCode,
 }: IPrintOption) {
     const toast = useToast();
-    const [nationList, setNationList] = useRecoilState(NationList);
+    const wantNationList = useRecoilState(WantNationList);
+    const wentNationList = useRecoilState(WentNationList);
+    const likeNationList = useRecoilState(LikeNationList);
 
     function updateNationState() {
         if (!isAlreadyExistNation(nation)) {
@@ -34,11 +40,11 @@ export default function PrintOption({
         switch (actionCode) {
             // delete
             case 0:
-                const update = deleteNation(
-                    nationList[stateIndex],
-                    `${nation}:${code}`
-                );
-                console.log(update);
+                // const update = deleteNation(
+                //     nationList[stateIndex],
+                //     `${nation}:${code}`
+                // );
+                // console.log(update);
                 break;
 
             // like
