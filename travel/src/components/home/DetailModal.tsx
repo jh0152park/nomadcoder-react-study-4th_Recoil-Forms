@@ -15,7 +15,7 @@ interface IModalProsp {
     onClose: () => void;
     nation: string;
     code: string;
-    stateIndex: number;
+    stateCode: number;
 }
 
 interface IAction {
@@ -34,7 +34,7 @@ export default function DetailModal({
     onClose,
     nation,
     code,
-    stateIndex,
+    stateCode,
 }: IModalProsp) {
     return (
         <Modal
@@ -57,7 +57,7 @@ export default function DetailModal({
                             code={code}
                             nation={nation}
                             actionCode={i}
-                            stateIndex={stateIndex}
+                            stateCode={stateCode}
                             action={Actions[action]}
                         />
                     ))}

@@ -1,15 +1,17 @@
 import { Center, VStack } from "@chakra-ui/react";
-import { useRecoilValue } from "recoil";
-import { NationList, STATE_TITLE } from "../../global/projectCommon";
 import Flag from "./Flag";
 
 interface IPrintFlagProps {
-    stateIndex: number;
+    title: string;
+    stateCode: number;
+    nationList: string[];
 }
 
-export default function PrintFlag({ stateIndex }: IPrintFlagProps) {
-    const nationList = useRecoilValue(NationList);
-
+export default function PrintFlag({
+    title,
+    stateCode,
+    nationList,
+}: IPrintFlagProps) {
     return (
         <VStack
             w="30%"
@@ -18,12 +20,12 @@ export default function PrintFlag({ stateIndex }: IPrintFlagProps) {
             justifyContent="flex-start"
         >
             <Center fontSize="20px" fontWeight="bold" mb="30px">
-                {STATE_TITLE[stateIndex]}
+                {title}
             </Center>
-            {nationList[stateIndex].map((nation) => (
+            {nationList.map((nation) => (
                 <Flag
                     key={nation}
-                    stateIndex={stateIndex}
+                    stateCode={stateCode}
                     nation={nation.split(":")[0]}
                     code={nation.split(":")[1]}
                 />
