@@ -42,10 +42,3 @@ export default function Home() {
         </VStack>
     );
 }
-
-// Ghana: "GH",
-// Gabon: "GA",
-// Russia: "RU",
-// Vatican: "VA",
-// Bulgaria: "BG",
-// Brazil: "BR",
